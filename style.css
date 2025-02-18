@@ -123,6 +123,12 @@ canvas {
     font-size: 24px !important;
 }
 
+/* ✅ 変数を定義（カードのサイズを自由に変更可能に） */
+:root {
+    --header-card-width: 700px;  /* ★ デフォルトの横幅（自由に変更可） */
+    --header-card-height: 250px; /* ★ デフォルトの縦幅（自由に変更可） */
+}
+
 /* ✅ ヘッダーエリアのレイアウト */
 .header-container {
     display: flex;
@@ -131,32 +137,36 @@ canvas {
     padding: 10px 20px;
 }
 
-/* ✅ 追加: タイトルのエリアを確保し、カードとの間にスペースを作る */
+/* ✅ タイトルのエリアを確保し、カードとの間にスペースを作る */
 .header-left {
-    flex-grow: 1; /* ★ タイトルを左寄せしてスペースを確保 */
-    margin-right: 50px; /* ★ タイトルとカードの間に余白を追加 */
+    flex-grow: 1;
+    margin-right: 50px;
 }
 
 /* ✅ ヘッダー内のカードを右端に寄せる */
 .header-cards {
     display: flex;
     gap: 15px;
-    margin-left: auto; /* ★ 右端に寄せる */
-    flex-shrink: 0; /* ★ 圧縮されないように固定 */
-    min-width: 600px; /* ★ 確実にカードの幅を維持 */
+    margin-left: auto;
+    flex-shrink: 0;
+    min-width: calc(var(--header-card-width) * 2 + 30px); /* カード2枚分の幅＋間隔 */
 }
 
-/* ✅ 追加: タイトル横のカードデザイン */
+/* ✅ 追加: タイトル横のカードデザイン（サイズ自由変更可能） */
 .header-card {
     background: white;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    width: 500px;
+    width: var(--header-card-width);  /* ★ 自由に変更できる横幅 */
+    height: var(--header-card-height); /* ★ 自由に変更できる縦幅 */
     max-width: 100%;
     text-align: center;
     font-size: 24px;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* ✅ レスポンシブ対応（タブレット） */
