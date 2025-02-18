@@ -45,6 +45,12 @@ async function fetchData() {
     }
 }
 
+
+// ✅ 追加した2つのカードのサイズを変更（ページ読み込み時に適用）
+document.documentElement.style.setProperty('--header-card-width', '700px');
+document.documentElement.style.setProperty('--header-card-height', '2500px');
+
+
 // ✅ 手術台帳を開くクリックイベント
 document.getElementById('surgery-register-card').addEventListener('click', function() {
     window.open('https://docs.google.com/spreadsheets/d/1CHU8Cgxgg5IvL3nB6ackAdqxe7-CNkmWDvtYE-keuXI/edit', '_blank');
