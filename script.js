@@ -48,7 +48,7 @@ async function fetchData() {
 
 // ✅ 追加した2つのカードのサイズを変更（ページ読み込み時に適用）
 document.documentElement.style.setProperty('--header-card-width', '700px');
-document.documentElement.style.setProperty('--header-card-height', '2500px');
+document.documentElement.style.setProperty('--header-card-height', '250px');
 
 
 // ✅ 手術台帳を開くクリックイベント
