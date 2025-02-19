@@ -2,13 +2,27 @@
 const apiUrl = "https://script.google.com/macros/s/AKfycbzFNOekouxWlJ3g_q6Fg3ZXTX8udctKQSBKAwkupswvDaT5GJAF2dc2t1mDMdT2jA9q/exec";
 
 // ✅ 「水曜会」「経営戦略室の戦略」用 API
-const specialDataApiUrl = "https://script.google.com/macros/s/AKfycbyHQR0CzJKnC9w1gCeZmyPjmt8EWdejaH4t6uG643oFOdsDp040hGdRpKwqHtUo-ZrxMg/exec";
+const specialDataApiUrl = "https://script.google.com/macros/s/AKfycbyPikpNs-C043HCh9cLPIggbiZIgep44d31os8nCJtZPZz0KASzugNNbcVxThDRnjtfWA/exec";
 
 // ✅ 「水曜会」「経営戦略室の戦略」のデータ取得
 async function fetchSpecialData() {
     try {
         const response = await fetch(specialDataApiUrl);
+
+        
+        // ✅ CORS エラーを確認するためのデバッグログ
+        console.log("Fetching Special Data:", response);
+
+        if (!response.ok) {
+            throw new Error(`HTTP エラー: ${response.status}`);
+        }
+
+        
         const result = await response.json();
+
+        
+        console.log("Special Data Response:", result);
+
 
         if (!result.specialData) {
             console.error("❌ APIから「水曜会」「経営戦略室の戦略」のデータを取得できませんでした");
@@ -42,6 +56,8 @@ async function fetchData() {
 
         
         const latestData = result.data[result.data.length - 1];
+
+        document.getElementById("latest-date").innerHTML = `${formatDate(latestData["日付"])} <span class="update-time">更新時刻：${formatTime(result.lastEditTime)}</span>`;
 
         // ✅ 日付とスプレッドシートの更新時刻を表示
         const dateElement = document.getElementById("latest-date");
