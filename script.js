@@ -8,6 +8,15 @@ const specialDataApiUrl = "https://script.google.com/macros/s/AKfycbyPikpNs-C043
 async function fetchSpecialData() {
     try {
         const response = await fetch(specialDataApiUrl);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP エラー: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log("Spechal Data Resoinse:",result);
+
+        
 
         
         // ✅ CORS エラーを確認するためのデバッグログ
@@ -24,14 +33,14 @@ async function fetchSpecialData() {
         console.log("Special Data Response:", result);
 
 
-        if (!result.specialData) {
+       if (!result.specialData) {
             console.error("❌ APIから「水曜会」「経営戦略室の戦略」のデータを取得できませんでした");
             return;
         }
 
-        // ✅ 「水曜会」「経営戦略室の戦略」のカードにスプレッドシートの値を反映
-        document.getElementById("suiyokai-card").innerText = result.specialData.suiyokai || "データなし";
-        document.getElementById("keiei-card").innerText = result.specialData.keiei || "データなし";
+        // ✅ タイトルを維持しながらデータを表示
+        document.getElementById("suiyokai-card").innerHTML = "<strong>水曜会</strong><br>" + (result.specialData.suiyokai || "データなし");
+        document.getElementById("keiei-card").innerHTML = "<strong>経営戦略室の戦略</strong><br>" + (result.specialData.keiei || "データなし");
 
     } catch (error) {
         console.error("❌ 特別データ取得エラー:", error);
