@@ -29,6 +29,18 @@ async function fetchData() {
     try {
         const response = await fetch(apiUrl);
         const result = await response.json();
+
+
+                // ✅ デバッグ用ログ
+        console.log("API Response:", result);
+
+        if (!result.data || result.data.length === 0) {
+            console.error("❌ データが取得できませんでした");
+            return;
+        }
+
+
+        
         const latestData = result.data[result.data.length - 1];
 
         // ✅ 日付とスプレッドシートの更新時刻を表示
