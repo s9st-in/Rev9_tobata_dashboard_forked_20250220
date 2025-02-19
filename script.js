@@ -51,13 +51,18 @@ async function fetchData() {
 
         const latestData = result.data[result.data.length - 1];
 
-        // ✅ 日付とスプレッドシートの更新時刻を表示
-        const dateElement = document.getElementById("latest-date");
-        const formattedDate = latestData["日付"] ? formatDate(latestData["日付"]) : "日付不明";
-        const formattedTime = result.lastEditTime ? formatTime(result.lastEditTime) : "--:--";
+        // ✅ 更新時刻を確実に取得するように修正
+        let lastEditTime = result.lastEditTime ? new Date(result.lastEditTime) : null;
+        let formattedTime = lastEditTime ? `${lastEditTime.getHours().toString().padStart(2, '0')}:${lastEditTime.getMinutes().toString().padStart(2, '0')}` : "--:--";
 
-        dateElement.innerHTML = `${formattedDate} <span class="update-time">更新時刻：${formattedTime}</span>`;
-        dateElement.style.fontSize = "32px"; 
+        // ✅ 日付フォーマット
+        const formattedDate = latestData["日付"] ? formatDate(latestData["日付"]) : "日付不明";
+
+        // ✅ 更新時刻を確実に表示
+        document.getElementById("latest-date").innerHTML = `${formattedDate} <span class="update-time">更新時刻：${formattedTime}</span>`;
+
+        // ✅ フォントサイズを大きく
+        document.getElementById("latest-date").style.fontSize = "30px";  
 
 
         // ✅ ダッシュボードデータの表示
