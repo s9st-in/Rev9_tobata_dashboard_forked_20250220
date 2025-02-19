@@ -23,10 +23,14 @@ async function fetchSpecialData() {
         }
 
        // ✅ タイトルを維持しながらデータを左詰めで表示
-        document.getElementById("suiyokai-card").innerHTML = `
-            <strong>『水曜会』</strong><br><div style="text-align: left;">${result.specialData.suiyokai || "データなし"}</div>`;
-        document.getElementById("keiei-card").innerHTML = `
-            <strong>『経営戦略室の戦略』</strong><br><div style="text-align: left;">${result.specialData.keiei || "データなし"}</div>`;
+        // ✅ 『』を追加し、左詰めに設定
+        document.getElementById("suiyokai-card").innerHTML = `<strong>『水曜会』</strong><br>${result.specialData.suiyokai || "データなし"}`;
+        document.getElementById("keiei-card").innerHTML = `<strong>『経営戦略室の戦略』</strong><br>${result.specialData.keiei || "データなし"}`;
+
+        // ✅ 左詰めのスタイルを適用
+        document.getElementById("suiyokai-card").style.textAlign = "left";
+        document.getElementById("keiei-card").style.textAlign = "left";
+
         
     } catch (error) {
         console.error("❌ 特別データ取得エラー:", error);
