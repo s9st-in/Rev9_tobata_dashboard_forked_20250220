@@ -74,10 +74,8 @@ async function fetchData() {
         document.querySelector(".dashboard .card:nth-child(7) strong").innerText = `${latestData["平均在院日数"]}日`; // 追加
 
         // ✅ グラフ描画（表示する期間を変更可能）
-        const daysToShow = 14;  // ← ここで表示日数を変更（7, 14, 30 など）
-        const labels = result.data.map(item => formatDateForChart(item["日付"]));
-        const recentLabels = labels.slice(-daysToShow);
-        const recentData = result.data.slice(-daysToShow);
+        const daysToShow = 14; // ← 変更する期間（例: 14日分を表示）
+        const labels = result.data.slice(-daysToShow).map(item => formatDateForChart(item["日付"]));
         
         createChart("bedChart", "病床利用率 (%)", labels, result.data.map(item => item["病床利用率 (%)"] * 100), "blue", "％", 110);
         createChart("ambulanceChart", "救急車搬入数", labels, result.data.map(item => item["救急車搬入数"]), "red", "台");
