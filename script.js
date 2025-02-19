@@ -74,8 +74,8 @@ async function fetchData() {
         // ✅ グラフ描画
         const labels = result.data.map(item => formatDateForChart(item["日付"]));
         const daysToShow = 10;  // ← 表示する日数を変更（7, 14, 30 など）
-        const recentLabels = labels.slice(-daysToShow);
-        const recentData = result.data.slice(-daysToShow);
+        const recentLabels = labels.slice(-10);
+        const recentData = result.data.slice(-10);
         
         createChart("bedChart", "病床利用率 (%)", labels, result.data.map(item => item["病床利用率 (%)"] * 100), "blue", "％", 110);
         createChart("ambulanceChart", "救急車搬入数", labels, result.data.map(item => item["救急車搬入数"]), "red", "台");
