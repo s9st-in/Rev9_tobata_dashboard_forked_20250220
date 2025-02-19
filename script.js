@@ -17,17 +17,14 @@ async function fetchData() {
 
         dateElement.innerHTML = `${formattedDate} <span class="update-time">更新時刻：${formattedTime}</span>`;
         dateElement.style.fontSize = "32px"; // ✅ フォントサイズを大きく
-        
-                // ✅ ダッシュボードデータの表示
-        document.querySelector(".dashboard .card:nth-child(1) strong").innerText = `${(latestData["病床利用率 (%)"] * 100).toFixed(1)}%`;
-
-        
 
         // ✅ 「水曜会」「経営戦略室の戦略」のカードにスプレッドシートの値を反映
-        document.getElementById("suiyokai-card").innerText = result.specialData.suiyokai;
-        document.getElementById("keiei-card").innerText = result.specialData.keiei;
+        if (result.specialData) {  // ✅ `specialData` が存在する場合のみ処理
+            document.getElementById("suiyokai-card").innerText = result.specialData.suiyokai || "データなし";
+            document.getElementById("keiei-card").innerText = result.specialData.keiei || "データなし";
+        }
 
-        // ✅ データの表示
+        // ✅ ダッシュボードデータの表示
         document.querySelectorAll(".dashboard .card").forEach(card => {
             card.style.fontSize = "28px";
         });
@@ -54,9 +51,6 @@ async function fetchData() {
     }
 }
 
-
-
-
 // ✅ 手術台帳を開くクリックイベント
 document.getElementById('surgery-register-card').addEventListener('click', function() {
     window.open('https://docs.google.com/spreadsheets/d/1CHU8Cgxgg5IvL3nB6ackAdqxe7-CNkmWDvtYE-keuXI/edit', '_blank');
@@ -64,12 +58,12 @@ document.getElementById('surgery-register-card').addEventListener('click', funct
 
 // ✅ 当直管理表を開くクリックイベント（新規追加）
 document.getElementById('duty-management-card').addEventListener('click', function() {
-    window.open('https://docs.google.com/spreadsheets/d/e/2PACX-1vTfU1BN4pPg9rY9INF2Kea_OIq1Bya875QFvAmi87uRGYw1t3pH69Lx0msXIbbLtZ0XZqYMtJYsrIrR/pubhtml?gid=0&single=true'); // ← ここに「当直管理表」のスプレッドシートURLを入れる
+    window.open('https://docs.google.com/spreadsheets/d/e/2PACX-1vTfU1BN4pPg9rY9INF2Kea_OIq1Bya875QFvAmi87uRGYw1t3pH69Lx0msXIbbLtZ0XZqYMtJYsrIrR/pubhtml?gid=0&single=true');
 });
 
 // ✅ 新型コロナ感染状況を開くクリックイベント（新規追加）
 document.getElementById('covid-status-card').addEventListener('click', function() {
-    window.open('https://docs.google.com/spreadsheets/d/1pgLCwJPxPpGO_-ro_J78QYqLzjrGHgTBKHL3ngybBbY/edit?gid=0#gid=0'); // ← ここに「新型コロナ感染状況」のスプレッドシートURLを入力
+    window.open('https://docs.google.com/spreadsheets/d/1pgLCwJPxPpGO_-ro_J78QYqLzjrGHgTBKHL3ngybBbY/edit?gid=0#gid=0');
 });
 
 // ✅ グラフ作成関数
@@ -78,14 +72,6 @@ function createChart(canvasId, label, labels, data, color, unit, maxY = null) {
     const recentData = data.slice(-7);
 
     const canvas = document.getElementById(canvasId);
-    canvas.style.height = "350px";
-    canvas.style.width = "100%";
-    canvas.style.backgroundColor = "#ffffff";
-    canvas.style.margin = "10px auto";
-    canvas.style.padding = "10px";
-    canvas.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
-    canvas.style.borderRadius = "8px";
-
     new Chart(canvas, {
         type: "line",
         data: {
@@ -101,49 +87,18 @@ function createChart(canvasId, label, labels, data, color, unit, maxY = null) {
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            layout: {
-                padding: 10
-            },
             plugins: {
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: true,
-                    text: label,
-                    font: {
-                        size: 48,
-                        weight: 'bold'
-                    }
-                }
+                legend: { display: false },
+                title: { display: true, text: label, font: { size: 48, weight: 'bold' } }
             },
             scales: {
                 y: {
                     beginAtZero: true,
                     max: maxY,
-                    title: {
-                        display: true,
-                        text: unit,
-                        font: {
-                            size: 36,
-                            weight: 'bold'
-                        }
-                    },
-                    ticks: {
-                        font: {
-                            size: 36,
-                            weight: 'bold'
-                        }
-                    }
+                    title: { display: true, text: unit, font: { size: 36, weight: 'bold' } },
+                    ticks: { font: { size: 36, weight: 'bold' } }
                 },
-                x: {
-                    ticks: {
-                        font: {
-                            size: 36,
-                            weight: 'bold'
-                        }
-                    }
-                }
+                x: { ticks: { font: { size: 36, weight: 'bold' } } }
             }
         }
     });
@@ -151,25 +106,16 @@ function createChart(canvasId, label, labels, data, color, unit, maxY = null) {
 
 // ✅ 日付フォーマット関数
 function formatDate(dateString) {
-    if (!dateString) return "日付不明"; // ✅ データがない場合の対処
-
+    if (!dateString) return "日付不明";
     const date = new Date(dateString);
-    const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    const dayOfWeek = weekdays[date.getDay()];
-    return `${year}年${month}月${day}日(${dayOfWeek})`;
+    return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日(${["日", "月", "火", "水", "木", "金", "土"][date.getDay()]})`;
 }
 
 // ✅ 時刻フォーマット関数
 function formatTime(dateString) {
-    if (!dateString) return "--:--"; // ✅ データがない場合の対処
-
+    if (!dateString) return "--:--";
     const date = new Date(dateString);
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    return `${hours}:${minutes}`;
+    return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
 }
 
 // ✅ グラフ用の日付フォーマット
