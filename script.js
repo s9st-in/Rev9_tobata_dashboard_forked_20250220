@@ -39,8 +39,8 @@ async function fetchSpecialData() {
         }
 
         // ✅ タイトルを維持しながらデータを表示
-        document.getElementById("suiyokai-card").innerHTML = "<strong>水曜会</strong><br>" + (result.specialData.suiyokai || "データなし");
-        document.getElementById("keiei-card").innerHTML = "<strong>経営戦略室の戦略</strong><br>" + (result.specialData.keiei || "データなし");
+        document.getElementById("suiyokai-card").innerHTML = `<strong>水曜会</strong><br>${result.specialData.suiyokai || "データなし"}`);
+        document.getElementById("keiei-card").innerHTML = `<strong>経営戦略室の戦略</strong><br>${result.specialData.keiei || "データなし"}`);
 
     } catch (error) {
         console.error("❌ 特別データ取得エラー:", error);
