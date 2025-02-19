@@ -2,7 +2,7 @@
 const apiUrl = "https://script.google.com/macros/s/AKfycbzFNOekouxWlJ3g_q6Fg3ZXTX8udctKQSBKAwkupswvDaT5GJAF2dc2t1mDMdT2jA9q/exec";
 
 // ✅ 「水曜会」「経営戦略室の戦略」用 API
-const specialDataApiUrl = "https://script.google.com/macros/s/AKfycby6VFrIgHxJFkggqHTKI4C-cZt-R9ECgWzvs9Dr8V8a22OsiYs5JV5ZijP5aY7ou71CFw/exec";
+const specialDataApiUrl = "https://script.google.com/macros/s/AKfycbxDve07IxS6VsNXX-c5Jb_PgT0HFvyKZdnDRpLpcgHubE9ElPOGbnuophaNgKCvyELzKQ/exec";
 
 // ✅ 「水曜会」「経営戦略室の戦略」のデータ取得
 async function fetchSpecialData() {
@@ -84,18 +84,24 @@ document.getElementById('covid-status-card').addEventListener('click', function(
     window.open('https://docs.google.com/spreadsheets/d/1pgLCwJPxPpGO_-ro_J78QYqLzjrGHgTBKHL3ngybBbY/edit?gid=0#gid=0');
 });
 
+
+
 // ✅ グラフ作成関数
 function createChart(canvasId, label, labels, data, color, unit, maxY = null) {
-    const recentLabels = labels.slice(-7);
-    const recentData = data.slice(-7);
-
     const canvas = document.getElementById(canvasId);
-    new Chart(canvas, {
+
+    // ✅ 既存のグラフがある場合は破棄（エラー防止）
+    if (canvas.chartInstance) {
+        canvas.chartInstance.destroy();
+    }
+
+    // ✅ 新しいグラフを作成し、インスタンスを保持
+    canvas.chartInstance = new Chart(canvas, {
         type: "line",
         data: {
-            labels: recentLabels,
+            labels: labels,
             datasets: [{
-                data: recentData,
+                data: data,
                 borderColor: color,
                 backgroundColor: color,
                 fill: false,
@@ -121,6 +127,7 @@ function createChart(canvasId, label, labels, data, color, unit, maxY = null) {
         }
     });
 }
+
 
 // ✅ 日付フォーマット関数
 function formatDate(dateString) {
