@@ -41,11 +41,6 @@ async function fetchData() {
         dateElement.innerHTML = `${formattedDate} <span class="update-time">更新時刻：${formattedTime}</span>`;
         dateElement.style.fontSize = "32px"; // ✅ フォントサイズを大きく
 
-        // ✅ 「水曜会」「経営戦略室の戦略」のカードにスプレッドシートの値を反映
-        if (result.specialData) {  // ✅ `specialData` が存在する場合のみ処理
-            document.getElementById("suiyokai-card").innerText = result.specialData.suiyokai || "データなし";
-            document.getElementById("keiei-card").innerText = result.specialData.keiei || "データなし";
-        }
 
         // ✅ ダッシュボードデータの表示
         document.querySelectorAll(".dashboard .card").forEach(card => {
