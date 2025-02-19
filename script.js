@@ -9,23 +9,22 @@ async function fetchSpecialData() {
     try {
         console.log("Fetching Special Data...");
         const response = await fetch(specialDataApiUrl);
-        
+
         if (!response.ok) {
             throw new Error(`HTTP エラー: ${response.status}`);
         }
-        
+
         const result = await response.json();
         console.log("Special Data Response:", result);
-        
+
         if (!result || !result.specialData) {
             console.error("❌ APIから「水曜会」「経営戦略室の戦略」のデータを取得できませんでした");
             return;
         }
 
         // ✅ タイトルを維持しながらデータを表示
-        document.getElementById("suiyokai-card").innerHTML = `<strong>水曜会</strong><br>${result.specialData.suiyokai ?? "データなし"}`;
-        document.getElementById("keiei-card").innerHTML = `<strong>経営戦略室の戦略</strong><br>${result.specialData.keiei ?? "データなし"}`;
-
+        document.getElementById("suiyokai-card").innerHTML = `<strong>水曜会</strong><br>${result.specialData.suiyokai || "データなし"}`;
+        document.getElementById("keiei-card").innerHTML = `<strong>経営戦略室の戦略</strong><br>${result.specialData.keiei || "データなし"}`;
 
     } catch (error) {
         console.error("❌ 特別データ取得エラー:", error);
@@ -36,30 +35,27 @@ async function fetchSpecialData() {
 async function fetchData() {
     try {
         const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error(`HTTP エラー: ${response.status}`);
+        }
+
         const result = await response.json();
-
-
-                // ✅ デバッグ用ログ
         console.log("API Response:", result);
 
-        if (!result || !result.specialData) {
-            console.error("❌ APIから「水曜会」「経営戦略室の戦略」のデータを取得できませんでした");
+        if (!result || !result.data || result.data.length === 0) {
+            console.error("❌ データが取得できませんでした");
             return;
         }
 
         const latestData = result.data[result.data.length - 1];
 
-        document.getElementById("latest-date").innerHTML = `${formatDate(latestData["日付"])} <span class="update-time">更新時刻：${formatTime(result.lastEditTime)}</span>`;
-
         // ✅ 日付とスプレッドシートの更新時刻を表示
         const dateElement = document.getElementById("latest-date");
-
-        // ✅ 日付が存在しない場合のフォールバック処理
         const formattedDate = latestData["日付"] ? formatDate(latestData["日付"]) : "日付不明";
         const formattedTime = result.lastEditTime ? formatTime(result.lastEditTime) : "--:--";
 
         dateElement.innerHTML = `${formattedDate} <span class="update-time">更新時刻：${formattedTime}</span>`;
-        dateElement.style.fontSize = "32px"; // ✅ フォントサイズを大きく
+        dateElement.style.fontSize = "32px"; 
 
 
         // ✅ ダッシュボードデータの表示
