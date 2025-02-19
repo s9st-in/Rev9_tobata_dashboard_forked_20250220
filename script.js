@@ -110,12 +110,12 @@ document.getElementById('covid-status-card').addEventListener('click', function(
 function createChart(canvasId, label, labels, data, color, unit, maxY = null) {
     const canvas = document.getElementById(canvasId);
 
-    // ✅ 既存のグラフがある場合は破棄（エラー防止）
+    // ✅ 既存のグラフがある場合は削除
     if (canvas.chartInstance) {
         canvas.chartInstance.destroy();
     }
 
-    // ✅ 新しいグラフを作成し、インスタンスを保持
+    // ✅ 新しいグラフを作成し、インスタンスを保存
     canvas.chartInstance = new Chart(canvas, {
         type: "line",
         data: {
