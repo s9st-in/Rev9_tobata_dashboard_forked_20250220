@@ -68,7 +68,7 @@ async function fetchData() {
         const formattedDate = latestData["日付"] ? formatDate(latestData["日付"]) : "日付不明";
 
         // ✅ 更新時刻を確実に表示
-        document.getElementById("latest-date").innerHTML = `${formattedDate} <br><span class="update-time">更新時刻：${formattedTime}</span>`;
+        document.getElementById("latest-date").innerHTML = `${formattedDate}<br><span class="update-time">更新時刻：${formattedTime}</span>`;
 
         // ✅ フォントサイズを大きく
         document.getElementById("latest-date").style.fontSize = "30px";  
