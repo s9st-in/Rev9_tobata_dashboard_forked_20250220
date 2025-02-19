@@ -190,3 +190,6 @@ function formatDateForChart(dateString) {
 // ✅ 初期化
 fetchData();
 fetchSpecialData();  // ✅ 「水曜会」「経営戦略室の戦略」のデータ取得も実行
+
+// ✅ タイトルのフォントサイズ変更
+document.querySelector("h1.left-align").style.fontSize = "40px"; // ← フォントサイズを変更
