@@ -27,9 +27,14 @@ async function fetchSpecialData() {
         document.getElementById("suiyokai-card").innerHTML = `<strong>『水曜会』</strong><br>${result.specialData.suiyokai || "データなし"}`;
         document.getElementById("keiei-card").innerHTML = `<strong>『経営戦略室の戦略』</strong><br>${result.specialData.keiei || "データなし"}`;
 
-        // ✅ 左詰めのスタイルを適用
-        document.getElementById("suiyokai-card").style.textAlign = "left";
-        document.getElementById("keiei-card").style.textAlign = "left";
+        // ✅ 追加したカードのサイズを変更（横幅と高さを指定）
+        document.getElementById("suiyokai-card").style.width = "700px";  // 横幅
+        document.getElementById("suiyokai-card").style.height = "220px"; // 高さ
+        document.getElementById("suiyokai-card").style.textAlign = "left"; // 左詰め表示
+
+        document.getElementById("keiei-card").style.width = "700px";  // 横幅
+        document.getElementById("keiei-card").style.height = "220px"; // 高さ
+        document.getElementById("keiei-card").style.textAlign = "left"; // 左詰め表示
 
         
     } catch (error) {
