@@ -18,10 +18,21 @@ async function fetchData() {
         dateElement.innerHTML = `${formattedDate} <span class="update-time">更新時刻：${formattedTime}</span>`;
         dateElement.style.fontSize = "32px"; // ✅ フォントサイズを大きく
 
+        
+
+                // ✅ ダッシュボードデータの表示
+        document.querySelector(".dashboard .card:nth-child(1) strong").innerText = `${(latestData["病床利用率 (%)"] * 100).toFixed(1)}%`;
+
+        // ✅ 「水曜会」「経営戦略室の戦略」のカードにスプレッドシートの値を反映
+        document.getElementById("suiyokai-card").innerText = result.specialData.suiyokai;
+        document.getElementById("keiei-card").innerText = result.specialData.keiei;
+
         // ✅ データの表示
         document.querySelectorAll(".dashboard .card").forEach(card => {
             card.style.fontSize = "28px";
         });
+
+        
 
         document.querySelector(".dashboard .card:nth-child(1) strong").innerText = `${(latestData["病床利用率 (%)"] * 100).toFixed(1)}%`;
         document.querySelector(".dashboard .card:nth-child(2) strong").innerText = `${latestData["救急車搬入数"]}台`;
