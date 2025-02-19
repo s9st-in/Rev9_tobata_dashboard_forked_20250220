@@ -1,5 +1,28 @@
-// ✅ Google Apps ScriptのURLをここに貼り付け
+// ✅ ダッシュボードのデータ取得 & グラフ表示用 API
 const apiUrl = "https://script.google.com/macros/s/AKfycbzFNOekouxWlJ3g_q6Fg3ZXTX8udctKQSBKAwkupswvDaT5GJAF2dc2t1mDMdT2jA9q/exec";
+
+// ✅ 「水曜会」「経営戦略室の戦略」用 API
+const specialDataApiUrl = "https://script.google.com/macros/s/AKfycby6VFrIgHxJFkggqHTKI4C-cZt-R9ECgWzvs9Dr8V8a22OsiYs5JV5ZijP5aY7ou71CFw/exec";
+
+// ✅ 「水曜会」「経営戦略室の戦略」のデータ取得
+async function fetchSpecialData() {
+    try {
+        const response = await fetch(specialDataApiUrl);
+        const result = await response.json();
+
+        if (!result.specialData) {
+            console.error("❌ APIから「水曜会」「経営戦略室の戦略」のデータを取得できませんでした");
+            return;
+        }
+
+        // ✅ 「水曜会」「経営戦略室の戦略」のカードにスプレッドシートの値を反映
+        document.getElementById("suiyokai-card").innerText = result.specialData.suiyokai || "データなし";
+        document.getElementById("keiei-card").innerText = result.specialData.keiei || "データなし";
+
+    } catch (error) {
+        console.error("❌ 特別データ取得エラー:", error);
+    }
+}
 
 // ✅ データ取得 & グラフ表示
 async function fetchData() {
@@ -126,3 +149,4 @@ function formatDateForChart(dateString) {
 
 // ✅ 初期化
 fetchData();
+fetchSpecialData();  // ✅ 「水曜会」「経営戦略室の戦略」のデータ取得も実行
