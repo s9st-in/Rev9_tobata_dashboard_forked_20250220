@@ -24,9 +24,9 @@ async function fetchSpecialData() {
 
        // ✅ タイトルを維持しながらデータを左詰めで表示
         document.getElementById("suiyokai-card").innerHTML = `
-            <strong>水曜会</strong><br><div style="text-align: left;">${result.specialData.suiyokai || "データなし"}</div>`;
+            <strong>『水曜会』</strong><br><div style="text-align: left;">${result.specialData.suiyokai || "データなし"}</div>`;
         document.getElementById("keiei-card").innerHTML = `
-            <strong>経営戦略室の戦略</strong><br><div style="text-align: left;">${result.specialData.keiei || "データなし"}</div>`;
+            <strong>『経営戦略室の戦略』</strong><br><div style="text-align: left;">${result.specialData.keiei || "データなし"}</div>`;
         
     } catch (error) {
         console.error("❌ 特別データ取得エラー:", error);
