@@ -84,6 +84,10 @@ async function fetchData() {
         createChart("generalWardChart", "一般病棟在院数", labels, result.data.map(item => item["一般病棟在院数"]), "purple", "床");
         createChart("icuChart", "集中治療室在院数", labels, result.data.map(item => item["集中治療室在院数"]), "teal", "床");
 
+                // ✅ 平均在院日数のグラフを追加（場合によっては改修検討）
+        createChart("averageStayChart", "平均在院日数", labels, result.data.slice(-daysToShow).map(item => item["平均在院日数"]), "darkblue", "日");
+
+
     } catch (error) {
         console.error("❌ データ取得エラー:", error);
     }
