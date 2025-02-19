@@ -91,7 +91,7 @@ async function fetchData() {
         const daysToShow = 14; // ← 変更する期間（例: 14日分を表示）
         const labels = result.data.slice(-daysToShow).map(item => formatDateForChart(item["日付"]));
         
-        createChart("bedChart", "病床利用率", labels, result.data.map(item => item["病床利用率"] * 100), "blue", "％", 110);
+        createChart("bedChart", "病床利用率", labels, result.data.map(item => item["病床利用率 (%)"] * 100), "blue", "", 110);
         createChart("ambulanceChart", "救急車搬入数", labels, result.data.map(item => item["救急車搬入数"]), "red", "台");
         createChart("inpatientsChart", "入院患者数", labels, result.data.map(item => item["入院患者数"]), "green", "人");
         createChart("dischargesChart", "退院予定数", labels, result.data.map(item => item["退院予定数"]), "orange", "人");
