@@ -2,7 +2,7 @@
 const apiUrl = "https://script.google.com/macros/s/AKfycbzFNOekouxWlJ3g_q6Fg3ZXTX8udctKQSBKAwkupswvDaT5GJAF2dc2t1mDMdT2jA9q/exec";
 
 // ✅ 「水曜会」「経営戦略室の戦略」用 API
-const specialDataApiUrl = "https://script.google.com/macros/s/AKfycbxDve07IxS6VsNXX-c5Jb_PgT0HFvyKZdnDRpLpcgHubE9ElPOGbnuophaNgKCvyELzKQ/exec";
+const specialDataApiUrl = "https://script.google.com/macros/s/AKfycbyHQR0CzJKnC9w1gCeZmyPjmt8EWdejaH4t6uG643oFOdsDp040hGdRpKwqHtUo-ZrxMg/exec";
 
 // ✅ 「水曜会」「経営戦略室の戦略」のデータ取得
 async function fetchSpecialData() {
