@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,47 +8,83 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
 
-<header>
-<!-- タグが正しく閉じられていません -->
-<!-- <div class="header-container"> -->
-    <div class="header-container">
-        <div class="header-left">
-            <h1 class="left-align">戸畑共立病院<br>ダッシュボード</h1>
-            <div class="date-display" id="latest-date">2025年2月17日(月) <br><span class="update-time">更新時刻：00:00</span></div>
+    <header>
+        <!-- タグが正しく閉じられていません -->
+        <!-- <div class="header-container"> -->
+        <div class="header-container">
+            <div class="header-left">
+                <h1 class="left-align">戸畑共立病院<br>ダッシュボード</h1>
+                <div class="date-display" id="latest-date">2025年2月17日(月) <br><span class="update-time">更新時刻：00:00</span>
+                </div>
+            </div>
+            <div class="header-cards">
+                <div class="card header-card" id="suiyokai-card">
+                    <h3>『水曜会 Top Down!』</h3>
+                </div>
+                <div class="card header-card" id="keiei-card">
+                    <h3>『経営戦略室の戦略』</h3>
+                </div>
+            </div>
         </div>
-        <div class="header-cards">
-            <div class="card header-card" id="suiyokai-card"><h3>『水曜会 Top Down!』</h3></div>
-            <div class="card header-card" id="keiei-card"><h3>『経営戦略室の戦略』</h3></div>
-        </div>
-    </div>
-</header>
+    </header>
 
-    
+
     <div class="dashboard">
-        <div class="card"><h3>病床利用率</h3><strong>--%</strong></div>
-        <div class="card"><h3>救急車搬入</h3><strong>--台</strong></div>
-        <div class="card"><h3>入院患者</h3><strong>--人</strong></div>
-        <div class="card"><h3>退院予定</h3><strong>--人</strong></div>
-        <div class="card"><h3>一般病棟在院数</h3><strong>--/218 床</strong></div>
-        <div class="card"><h3>集中治療室在院数</h3><strong>--/16 床</strong></div>
-        <div class="card"><h3>平均在院日数</h3><strong>--日</strong></div>
-        <div class="card" id="surgery-register-card"><h3>手術台帳</h3><strong>クリックして表示</strong></div>
-        <div class="card" id="duty-management-card"><h3>当直管理表</h3><strong>クリックして表示</strong></div>
-        <div class="card" id="covid-status-card"><h3>新型コロナ感染状況</h3><strong>クリックして表示</strong></div>
+        <div class="card">
+            <h3>病床利用率</h3><strong>--%</strong>
+        </div>
+        <div class="card">
+            <h3>救急車搬入</h3><strong>--台</strong>
+        </div>
+        <div class="card">
+            <h3>入院患者</h3><strong>--人</strong>
+        </div>
+        <div class="card">
+            <h3>退院予定</h3><strong>--人</strong>
+        </div>
+        <div class="card">
+            <h3>一般病棟在院数</h3><strong>--/218 床</strong>
+        </div>
+        <div class="card">
+            <h3>集中治療室在院数</h3><strong>--/16 床</strong>
+        </div>
+        <div class="card">
+            <h3>平均在院日数</h3><strong>--日</strong>
+        </div>
+        <div class="card" id="surgery-register-card">
+            <h3>手術台帳</h3><strong>クリックして表示</strong>
+        </div>
+        <div class="card" id="duty-management-card">
+            <h3>当直管理表</h3><strong>クリックして表示</strong>
+        </div>
+        <div class="card" id="covid-status-card">
+            <h3>新型コロナ感染状況</h3><strong>クリックして表示</strong>
+        </div>
     </div>
 
     <div class="charts-grid">
-        <canvas id="bedChart"></canvas>
-        <canvas id="ambulanceChart"></canvas>
-        <canvas id="inpatientsChart"></canvas>
-        <canvas id="dischargesChart"></canvas>
-        <canvas id="generalWardChart"></canvas>
-        <canvas id="icuChart"></canvas>
-        
-        <canvas id="averageStayChart"></canvas>
-
+        <div>
+            <canvas id="bedChart"></canvas>
+        </div>
+        <div>
+            <canvas id="ambulanceChart"></canvas>
+        </div>
+        <div>
+            <canvas id="inpatientsChart"></canvas>
+        </div>
+        <div>
+            <canvas id="dischargesChart"></canvas>
+        </div>
+        <div>
+            <canvas id="generalWardChart"></canvas>
+        </div>
+        <div><canvas id="icuChart"></canvas></div>
+        <div>
+            <canvas id="averageStayChart"></canvas>
+        </div>
     </div>
 
     <script src="script.js"></script>
@@ -71,4 +108,5 @@
     </script> -->
 
 </body>
+
 </html>
