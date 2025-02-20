@@ -28,13 +28,13 @@ async function fetchSpecialData() {
         document.getElementById("keiei-card").innerHTML = `<strong>『経営戦略室の戦略』</strong><br>${result.specialData.keiei || "データなし"}`;
 
         // ✅ 追加したカードのサイズを変更（横幅と高さを指定）
-        document.getElementById("suiyokai-card").style.width = "700px";  // 横幅
-        document.getElementById("suiyokai-card").style.height = "220px"; // 高さ
-        document.getElementById("suiyokai-card").style.textAlign = "left"; // 左詰め表示
+        // document.getElementById("suiyokai-card").style.width = "700px";  // 横幅
+        // document.getElementById("suiyokai-card").style.height = "220px"; // 高さ
+        // document.getElementById("suiyokai-card").style.textAlign = "left"; // 左詰め表示
 
-        document.getElementById("keiei-card").style.width = "700px";  // 横幅
-        document.getElementById("keiei-card").style.height = "220px"; // 高さ
-        document.getElementById("keiei-card").style.textAlign = "left"; // 左詰め表示
+        // document.getElementById("keiei-card").style.width = "700px";  // 横幅
+        // document.getElementById("keiei-card").style.height = "220px"; // 高さ
+        // document.getElementById("keiei-card").style.textAlign = "left"; // 左詰め表示
 
         
     } catch (error) {
@@ -192,4 +192,5 @@ fetchData();
 fetchSpecialData();  // ✅ 「水曜会」「経営戦略室の戦略」のデータ取得も実行
 
 // ✅ タイトルのフォントサイズ変更
-document.querySelector("h1.left-align").style.fontSize = "32px"; // ← フォントサイズを変更
+// 削除：おすすめしません
+// document.querySelector("h1.left-align").style.fontSize = "32px"; // ← フォントサイズを変更

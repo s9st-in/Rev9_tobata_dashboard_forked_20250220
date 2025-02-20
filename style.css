@@ -135,12 +135,29 @@ canvas {
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
+
+    /* ここに最小の高さを設定しておくと、Data取得前後で表示がガタガタなりません */
+    /* 元の大きさは220pxを想定しているようですが、260pxに変更しました。*/
+    min-height: 260px;
 }
 
 /* ✅ タイトルのエリアを確保し、カードとの間にスペースを作る */
 .header-left {
-    flex-grow: 1;
+    /* 無効化：ボックスを拡大しないようにする */
+    /* flex-grow: 1; */
+
+    /* タイトル部分の初期寸法（変化しない場合） */
+    flex: 0 0 auto;
+    min-width: 320px;
+
     margin-right: 50px;
+
+    padding: 10px 20px;
+    
+
+    /* 追加：ボックスを左揃えにする */
+    justify-items: left;
+    
 }
 
 /* ✅ ヘッダー内のカードを右端に寄せる */
@@ -148,8 +165,14 @@ canvas {
     display: flex;
     gap: 15px;
     margin-left: auto;
-    flex-shrink: 0;
-    min-width: calc(var(--header-card-width) * 2 + 30px); /* カード2枚分の幅＋間隔 */
+    /* flex-shrink: 0; */
+    /* カード2枚分の幅＋間隔 */
+    /* min-width: calc(var(--header-card-width) * 2 + 30px); */
+
+    flex-grow: 1;
+
+    /* 追加：ボックスを右揃えにする */
+    justify-items: right;
 }
 
 /* ✅ 追加: タイトル横のカードデザイン（サイズ自由変更可能） */
@@ -158,9 +181,15 @@ canvas {
     padding: 15px;
     border-radius: 8px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    width: var(--header-card-width);  /* ★ 自由に変更できる横幅 */
-    height: var(--header-card-height); /* ★ 自由に変更できる縦幅 */
-    max-width: 100%;
+    /* ★ 自由に変更できる横幅 */
+    /* width: var(--header-card-width); */
+    /* ★ 自由に変更できる横幅 */
+    /* height: var(--header-card-height); */
+    /* max-width: 100%; */
+
+    width: auto !important;
+    flex: 1;
+
     text-align: center;
     font-size: 24px;
     font-weight: bold;
