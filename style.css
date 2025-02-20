@@ -141,6 +141,26 @@ canvas {
     min-height: 260px;
 }
 
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+
+    }
+
+    /* 応急処置 */
+    .header-container * {
+        text-align: center !important;git
+    }
+}
+
+@media (max-width: 1024px) {
+    .header-cards {
+        flex-direction: column;
+
+    }
+}
+
+
 /* ✅ タイトルのエリアを確保し、カードとの間にスペースを作る */
 .header-left {
     /* 無効化：ボックスを拡大しないようにする */
@@ -148,7 +168,7 @@ canvas {
 
     /* タイトル部分の初期寸法（変化しない場合） */
     flex: 0 0 auto;
-    min-width: 320px;
+    /* min-width: 320px; */
 
     margin-right: 50px;
 
