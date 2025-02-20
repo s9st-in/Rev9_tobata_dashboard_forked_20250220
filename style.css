@@ -170,7 +170,8 @@ canvas {
     flex: 0 0 auto;
     /* min-width: 320px; */
 
-    margin-right: 50px;
+    /* 無効*/
+    /* margin-right: 50px; */
 
     padding: 10px 20px;
     
