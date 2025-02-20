@@ -136,6 +136,8 @@ canvas {
     justify-content: space-between;
     padding: 10px 20px;
 
+    gap: 15px;
+
     /* ここに最小の高さを設定しておくと、Data取得前後で表示がガタガタなりません */
     /* 元の大きさは220pxを想定しているようですが、260pxに変更しました。*/
     min-height: 260px;
